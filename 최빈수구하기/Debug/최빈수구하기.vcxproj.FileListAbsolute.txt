@@ -1,2 +1,2 @@
-C:\Users\JJW_N-771\Desktop\Cstd\최빈수구하기\Debug\최빈수구하기.exe
-C:\Users\JJW_N-771\Desktop\Cstd\최빈수구하기\Debug\최빈수구하기.pdb
+C:\Users\JJW_N-771\Desktop\Cstd\최빈수구하기\Debug\test.exe
+C:\Users\JJW_N-771\Desktop\Cstd\최빈수구하기\Debug\test.pdb

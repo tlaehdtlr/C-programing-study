@@ -1,32 +1,50 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-int main()
-{	
-	/*int N;
-	scanf_s("%d", &N);
-	for (int num = 1; num <= N; num++)
-	{
-		do
-		{
-			if (num % 10 == 3 || num % 10 == 6 || num % 10 == 9)
-			{
-				printf("-");
-			}
-			else
-			{
-				printf("%d", num % 10);
-			}
-			num /= 10;
-		} while (num);
-		printf(" ");
-	}		*/
 
-	int a = 534;
-	do
+int nums[101] = { 0 };
+void init();
+
+int main()
+{
+	int T, tcase=0;
+	scanf("%d", &T);
+
+	for (int tc = 0; tc < 10; tc++)
 	{
-		printf("%d \n", a%10);
-		a /= 10;
-	} while (a);
+		scanf("%d", &tcase);		
+		init();
+
+		int num;
+		for (int i = 0; i < 1000; i++)
+		{
+			scanf("%d", &num);
+			nums[num]++;
+		}
+
+		int max = 0;
+		int ans;
+		for (int j = 0; j < 101; j++)
+		{
+			if (max <= nums[j])
+			{
+				max = nums[j];
+				ans = j;
+			}
+		}
+
+		printf("#%d %d\n", tcase, ans);
+
+	}	
 
 	return 0;
+}
+
+
+void init()
+{
+	for (int i = 0; i < 101; i++)
+	{
+		nums[i] = 0;
+	}
 }
