@@ -1,0 +1,2 @@
+C:\Users\JJW_N-771\Desktop\C공부\VSandC\x64\Debug\VSandC.exe
+C:\Users\JJW_N-771\Desktop\C공부\VSandC\x64\Debug\VSandC.pdb
