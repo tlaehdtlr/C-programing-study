@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
+    "\\arrpointer",
+    "\\memory",
+    "\\VSandC",
     "\\최빈수구하기"
   ],
-  "SelectedNode": "\\최빈수구하기\\main.c",
+  "SelectedNode": "\\arrpointer\\arrpointer.sln",
   "PreviewInSolutionExplorer": false
 }
