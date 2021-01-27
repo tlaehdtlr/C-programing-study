@@ -284,6 +284,7 @@ int (*pb)[4][5];
 
 ```c
 #include <stdio.h>
+
 void PrintValue(int a)
 {
     printf("value = %d\n", a);
@@ -328,8 +329,99 @@ int main()
     strcpy(str, "안녕하세요");
     printf("%s \n", str);
     free(str);
-    
     ```
+    
+  - malloc 사용
+
+    ```c
+    #include <stdio.h>
+    #include <stdlib.h>
+    
+    int main()
+    {
+        int *arr;
+        int n;
+    
+        // 배열 크기 받기
+        scanf("%d", &n);
+        // int형 배열 n개 크기 만듦
+        arr = (int*)malloc(sizeof(int)*n);
+        // n개 수 배열에 저장
+        for (int i=0; i<n; i++) scanf("%d", &arr[i]);
+        
+        for (int i=0; i<n; i++) printf("%d \n", arr[i]);
+        
+        // 동적할당 해제 (프린트 하고 나서 다~ 쓰고 해제해줘라)
+        free(arr);        
+    }
+    ```
+
+  - malloc 사용 2차원 배열 생성 코드
+
+    ```c
+    #include <stdio.h>
+    #include <stdlib.h>    // malloc, free 함수가 선언된 헤더 파일
+    void input_value(int **arr, int row, int col);
+    void output_value(int **arr, int row, int col);
+    
+    int main(void)
+    {
+    	int row, col;
+    	scanf("%d %d", &row, &col);
+    
+    	int **arr = malloc(sizeof(int *) * row);   
+    	/* 이중 포인터에 (int 포인터 크기 * row)만큼
+    	동적 메모리 할당. 배열의 세로 */
+    
+    	for (int i = 0; i < row; i++)            // 세로 크기만큼 반복
+    	{
+    		arr[i] = malloc(sizeof(int) * col);    
+    		// (int의 크기 * col)만큼 동적 메모리 할당. 배열의 가로
+    	}
+    
+    	input_value(arr, row, col);
+    	output_value(arr, row, col);
+    
+    	for (int i = 0; i < row; i++)    // 세로 크기만큼 반복
+    	{
+    		free(arr[i]);            // 2차원 배열의 가로 공간 메모리 해제
+    	}
+    
+    	free(arr);    // 2차원 배열의 세로 공간 메모리 해제
+    
+    	return 0;
+    }
+    
+    void input_value(int **arr, int row, int col)
+    {
+    	for (int i = 0; i < row; i++)
+    	{
+    		for (int j = 0; j < col; j++)
+    		{
+    			scanf("%d", &arr[i][j]);
+    		}
+    	}
+    }
+    
+    void output_value(int **arr, int row, int col)
+    {
+    	for (int i = 0; i < row; i++)
+    	{
+    		for (int j = 0; j < col; j++)
+    		{
+    			printf("%d ", arr[i][j]);
+    		}
+    		printf("\n");
+    	}
+    }
+    ```
+
+    
+
+
+
+
+
 
 - 메모리 관련 함수들
 
@@ -350,6 +442,76 @@ int main()
 - 크기를 지정해준다
 - int numbers[10];
 - 인덱스는 0부터 시작임 파이썬이랑 같음
+
+##### 2차원 배열 생성과 프린트 내 코드
+
+- ```c
+  #include <stdio.h>
+  #include <stdlib.h>   
+  void input_value(int **arr, int row, int col);
+  void output_value(int **arr, int row, int col);
+  
+  int main(void)
+  {
+  	int row, col;
+  	scanf("%d %d", &row, &col);
+  
+  	int **arr = malloc(sizeof(int *) * row);   
+  
+  	for (int i = 0; i < row; i++)          
+  	{
+  		arr[i] = malloc(sizeof(int) * col);    
+  	}
+  
+  	input_value(arr, row, col);
+  	output_value(arr, row, col);
+  
+  	for (int i = 0; i < row; i++)    
+  	{
+  		free(arr[i]);           
+  	}
+  
+  	free(arr);   
+  
+  	return 0;
+  }
+  
+  void input_value(int **arr, int row, int col)
+  {
+  	for (int i = 0; i < row; i++)
+  	{
+  		for (int j = 0; j < col; j++)
+  		{
+  			scanf("%d", &arr[i][j]);
+  		}
+  	}
+  }
+  
+  void output_value(int **arr, int row, int col)
+  {
+  	for (int i = 0; i < row; i++)
+  	{
+  		for (int j = 0; j < col; j++)
+  		{
+  			printf("%d ", arr[i][j]);
+  		}
+  		printf("\n");
+  	}
+  }
+  
+  void clear_arr(int **arr, int row, int col)
+  {
+  	for (int i = 0; i < row; i++)
+  	{
+  		for (int j = 0; j < col; j++)
+  		{
+  			arr[i][j] = 0;
+  		}
+  	}
+  }
+  ```
+
+- 
 
 #### 문자열
 
@@ -438,6 +600,200 @@ void main()
 - `&` 이거를 앞에 붙이면 참조에 의한 호출이 됨
   - 함수 정의할 때 인자에 자료형* 이런식으로 * 이거 붙여줘야해
   - 포인터(주소) 자료형으로 쓸 수 있게
+
+- ##### 함수 선언부 매크로
+  - http://jake.dothome.co.kr/attr1/
+  - `__weak`
+    - 링크 시, 다른 곳에 같은 이름의 strong symbol이 존재하면 이거 대신 strong 쓴다
+
+- 콜백 함수
+
+  - 사용자들이 호출하는 함수가 API인데, 이때 사용자가 작성한 함수를 API가 호출하게 하기 위해 콜백함수를 써야함
+  - 포인터 함수를 이용해준다
+    - 예제가 잘 나옴 https://pang2h.tistory.com/243
+
+
+
+
+
+### 매크로
+
+- 컴파일러에 특정 작업을 지시하는 전처리기(preprocessor)를 제공
+  보통 전처리기는 반복되는 값이나 작업을 미리 정의할 때, 사용하며 컴파일 옵션 설정이나 조건부 컴파일도 가능
+
+- define은 컴파일 직전에 처리됨, 전처리 과정 이후에 바뀜
+
+- https://dojang.io/mod/page/view.php?id=651 참고하셈
+
+- 변수 설정
+
+  - ```c
+    #include <stdio.h>
+    #define ARRAY_SIZE 10    // 10을 ARRAY_SIZE로 정의
+    
+    int main()
+    {
+        char s1[ARRAY_SIZE];    // 10 대신 ARRAY_SIZE 매크로 사용
+    
+        for (int i = 0; i < ARRAY_SIZE; i++)    // 10 대신 ARRAY_SIZE 매크로 사용
+        {
+            s1[i] = 97 + i;
+        }
+    
+        for (int i = 0; i < ARRAY_SIZE; i++)    // 10 대신 ARRAY_SIZE 매크로 사용
+        {
+            printf("%c ", s1[i]);
+        }
+    
+        return 0;
+    }
+    ```
+
+- 함수 모양 매크로
+
+  - 이거 개꿀인가 귀찮은 것들 다 한방컷인데?
+
+    ```c
+    #include <stdio.h>
+    
+    #define PRINT_NUM(x) printf("%d\n", x)    // printf("%d\n", x)를 PRINT_NUM(x)로 정의
+    
+    int main()
+    {
+        PRINT_NUM(10);    // 10: printf("%d\n", 10)
+    
+        PRINT_NUM(20);    // 20: printf("%d\n", 20)
+    
+        return 0;
+    }
+    ```
+
+  - 요거 여러 줄도 가능해. 근데 조건문이랑 반복문 쓸 때, 중괄호 잘 써줘야해 잊지마!!!
+
+
+
+#### 이외 전처리기 (#if, #else, #endif, #ifdef, #ifndef, #undef)
+
+-  #if , # endif
+
+  - ```c
+    #define a 10
+    
+    void main()
+    {
+        #if a == 10
+        printf("이것만 출력");
+        #elif a ==20
+        printf("어림없지");
+        #else
+        printf("둘다아님");
+        #endif        
+    }
+    ```
+
+  - 이 때 조건식에는 변수 쓰면 안됨
+
+    ```c
+    #define a 10
+    
+    void main()
+    {
+        int b = 10;
+        #if a == b
+        printf("이것만 출력");
+        #elif a == b+10
+        printf("어림없지");
+        #else
+        printf("둘다아님");
+        #endif        
+    }
+    ```
+
+  - 근데 밑에 명령문에는 가능함
+
+    ```c
+    #define a 10
+    
+    void main()
+    {
+        int b = 10;
+        #if a == b
+        printf("%d 이것만 출력", b);
+        #elif a == b+10
+        printf("어림없지");
+        #else
+        printf("둘다아님");
+        #endif        
+    }
+    ```
+
+- #ifdef
+
+  - 매크로 정의되어있는지만 따짐
+
+  - ```c
+    #define test
+    
+    void main()
+    {
+        #ifdef test
+        printf("정의돼있네");
+        #else
+        printf("안됨");
+        #endif        
+    }
+    ```
+
+- #endif 
+
+  - 여기 밑에 중괄호로 넣어서 디버깅 용이하게 하는거 같은데 일단 잘 모르겠으면 찾아보던가 나는 지금 피곤하다
+
+- #ifndef
+
+  - if not define 임
+
+- #undef
+
+  - 앞에 define 한거 취소
+
+- 헤더파일 중복 방지로 #ifndef 가 쓰이나봐
+
+  - ```c
+    #ifndef test
+    #define test
+    #endif
+    ```
+
+
+
+### 인라인 함수
+
+- 함수 선언 시 inline
+
+- 매크로 함수는 치환이고, 함수는 스택으로 불림
+
+- 매크로 함수 단점 보완하고자 일반 함수 성향 빌려옴
+
+- 컴파일러가 인라이닝하는게 이득이면 치환 / 아니면 일반 함수처럼 동작
+
+- ```c
+  #define MUL(a,b) ((a)*(b))
+   
+  #define MAX(a,b) ((a)>(b)?(a):(b))
+   
+  using namespace std;
+   
+  inline int func_mul(int a, int b){
+      return a*b;
+  }
+  inline int func_max(int a, int b){
+      return a>b?a:b;
+  }
+  ```
+
+- 
+
+
 
 ### 모듈화
 
