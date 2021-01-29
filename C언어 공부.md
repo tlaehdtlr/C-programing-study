@@ -330,93 +330,97 @@ int main()
     printf("%s \n", str);
     free(str);
     ```
-    
-  - malloc 사용
 
-    ```c
-    #include <stdio.h>
-    #include <stdlib.h>
-    
-    int main()
-    {
-        int *arr;
-        int n;
-    
-        // 배열 크기 받기
-        scanf("%d", &n);
-        // int형 배열 n개 크기 만듦
-        arr = (int*)malloc(sizeof(int)*n);
-        // n개 수 배열에 저장
-        for (int i=0; i<n; i++) scanf("%d", &arr[i]);
-        
-        for (int i=0; i<n; i++) printf("%d \n", arr[i]);
-        
-        // 동적할당 해제 (프린트 하고 나서 다~ 쓰고 해제해줘라)
-        free(arr);        
-    }
-    ```
+#### malloc
 
-  - malloc 사용 2차원 배열 생성 코드
+- https://blockdmask.tistory.com/286 설명 보셈
 
-    ```c
-    #include <stdio.h>
-    #include <stdlib.h>    // malloc, free 함수가 선언된 헤더 파일
-    void input_value(int **arr, int row, int col);
-    void output_value(int **arr, int row, int col);
-    
-    int main(void)
-    {
-    	int row, col;
-    	scanf("%d %d", &row, &col);
-    
-    	int **arr = malloc(sizeof(int *) * row);   
-    	/* 이중 포인터에 (int 포인터 크기 * row)만큼
-    	동적 메모리 할당. 배열의 세로 */
-    
-    	for (int i = 0; i < row; i++)            // 세로 크기만큼 반복
-    	{
-    		arr[i] = malloc(sizeof(int) * col);    
-    		// (int의 크기 * col)만큼 동적 메모리 할당. 배열의 가로
-    	}
-    
-    	input_value(arr, row, col);
-    	output_value(arr, row, col);
-    
-    	for (int i = 0; i < row; i++)    // 세로 크기만큼 반복
-    	{
-    		free(arr[i]);            // 2차원 배열의 가로 공간 메모리 해제
-    	}
-    
-    	free(arr);    // 2차원 배열의 세로 공간 메모리 해제
-    
-    	return 0;
-    }
-    
-    void input_value(int **arr, int row, int col)
-    {
-    	for (int i = 0; i < row; i++)
-    	{
-    		for (int j = 0; j < col; j++)
-    		{
-    			scanf("%d", &arr[i][j]);
-    		}
-    	}
-    }
-    
-    void output_value(int **arr, int row, int col)
-    {
-    	for (int i = 0; i < row; i++)
-    	{
-    		for (int j = 0; j < col; j++)
-    		{
-    			printf("%d ", arr[i][j]);
-    		}
-    		printf("\n");
-    	}
-    }
-    ```
+- malloc 사용
 
-    
+  ```c
+  #include <stdio.h>
+  #include <stdlib.h>
+  
+  int main()
+  {
+      int *arr;
+      int n;
+  
+      // 배열 크기 받기
+      scanf("%d", &n);
+      // int형 배열 n개 크기 만듦
+      arr = (int*)malloc(sizeof(int)*n);
+      // n개 수 배열에 저장
+      for (int i=0; i<n; i++) scanf("%d", &arr[i]);
+      
+      for (int i=0; i<n; i++) printf("%d \n", arr[i]);
+      
+      // 동적할당 해제 (프린트 하고 나서 다~ 쓰고 해제해줘라)
+      free(arr);        
+  }
+  ```
+
+- malloc 사용 2차원 배열 생성 코드
+
+  ```c
+  #include <stdio.h>
+  #include <stdlib.h>    // malloc, free 함수가 선언된 헤더 파일
+  void input_value(int **arr, int row, int col);
+  void output_value(int **arr, int row, int col);
+  
+  int main(void)
+  {
+  	int row, col;
+  	scanf("%d %d", &row, &col);
+  
+  	int **arr = malloc(sizeof(int *) * row);   
+  	/* 이중 포인터에 (int 포인터 크기 * row)만큼
+  	동적 메모리 할당. 배열의 세로 */
+  
+  	for (int i = 0; i < row; i++)            // 세로 크기만큼 반복
+  	{
+  		arr[i] = malloc(sizeof(int) * col);    
+  		// (int의 크기 * col)만큼 동적 메모리 할당. 배열의 가로
+  	}
+  
+  	input_value(arr, row, col);
+  	output_value(arr, row, col);
+  
+  	for (int i = 0; i < row; i++)    // 세로 크기만큼 반복
+  	{
+  		free(arr[i]);            // 2차원 배열의 가로 공간 메모리 해제
+  	}
+  
+  	free(arr);    // 2차원 배열의 세로 공간 메모리 해제
+  
+  	return 0;
+  }
+  
+  void input_value(int **arr, int row, int col)
+  {
+  	for (int i = 0; i < row; i++)
+  	{
+  		for (int j = 0; j < col; j++)
+  		{
+  			scanf("%d", &arr[i][j]);
+  		}
+  	}
+  }
+  
+  void output_value(int **arr, int row, int col)
+  {
+  	for (int i = 0; i < row; i++)
+  	{
+  		for (int j = 0; j < col; j++)
+  		{
+  			printf("%d ", arr[i][j]);
+  		}
+  		printf("\n");
+  	}
+  }
+  ```
+
+  
 
 
 
@@ -613,6 +617,13 @@ void main()
     - 예제가 잘 나옴 https://pang2h.tistory.com/243
 
 
+
+### 쓸 만한 함수
+
+#### assert
+
+- https://blockdmask.tistory.com/286
+- 디버그 모드에서만 컴파일되는 함수, 에러 검출용 코드
 
 
 
