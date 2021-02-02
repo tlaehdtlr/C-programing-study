@@ -1,8 +1,9 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <stdlib.h>
 
-long long int L[10000], R[10000];
-int merge(long long int arr[], int l1, int l2, int r1, int r2)
+
+int merge(int arr[], int L[], int R[], int l1, int l2, int r1, int r2)
 {	
 	int i = 0;
 	l2++;
@@ -50,14 +51,14 @@ int merge(long long int arr[], int l1, int l2, int r1, int r2)
 }
 
 
-int merge_sort(long long int arr[], int st, int end)
+int merge_sort(int arr[], int L[], int R[], int st, int end)
 {
 	if (st < end)
 	{
 		int mid = (st + end) / 2;
-		merge_sort(arr, st, mid);
-		merge_sort(arr, mid + 1, end);
-		merge(arr, st, mid, mid + 1, end);
+		merge_sort(arr, L, R, st, mid);
+		merge_sort(arr, L, R, mid + 1, end);
+		merge(arr, L, R, st, mid, mid + 1, end);
 	}
 	return 0;
 }
@@ -68,12 +69,21 @@ int main()
 	int N;
 	scanf("%d", &N);
 
-	long long int arr[10000] = { 0 };
-	for (int i = 0; i < N; i++) scanf("%d", &arr[i]);
-
-	merge_sort(arr, 0, N - 1);
+	int* human = (int*)malloc(sizeof(int) * N);
+	int* L = (int*)malloc(sizeof(int) * N);
+	int* R = (int*)malloc(sizeof(int) * N);
 	
-	for (int i = 0; i < N; i++) printf("%d\n", arr[i]);
+	for (int i = 0; i < N; i++) scanf("%d", &human[i]);
+	for (int i = 0; i < N; i++) L[i] = 0;
+	for (int i = 0; i < N; i++) R[i] = 0;
+
+	merge_sort(human, L, R, 0, N - 1);
+	
+	for (int i = 0; i < N; i++) printf("%d\n", human[i]);
+
+	free(human);
+	free(L);
+	free(R);
 
 	return 0;
 }

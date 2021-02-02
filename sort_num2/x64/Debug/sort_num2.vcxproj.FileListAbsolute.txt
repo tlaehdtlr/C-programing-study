@@ -1,0 +1,2 @@
+C:\Users\JJW_N-771\Desktop\Cstd\sort_num2\x64\Debug\sort_num2.exe
+C:\Users\JJW_N-771\Desktop\Cstd\sort_num2\x64\Debug\sort_num2.pdb
