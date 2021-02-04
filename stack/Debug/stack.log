@@ -1,0 +1,17 @@
+﻿  main.c
+C:\Users\JJW_N-771\Desktop\Cstd\stack\main.c(8,19): warning C4047: '=': 'int *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\Users\JJW_N-771\Desktop\Cstd\stack\main.c(16,1): warning C4047: '초기화 중': 'int'의 간접 참조 수준이 'int *'과(와) 다릅니다.
+C:\Users\JJW_N-771\Desktop\Cstd\stack\main.c(36,24): warning C4047: 'return': 'int'의 간접 참조 수준이 'int *'과(와) 다릅니다.
+C:\Users\JJW_N-771\Desktop\Cstd\stack\main.c(45,21): warning C4013: 'malloc'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\JJW_N-771\Desktop\Cstd\stack\main.c(58,14): warning C4047: '함수': 'int **'의 간접 참조 수준이 'int *'과(와) 다릅니다.
+C:\Users\JJW_N-771\Desktop\Cstd\stack\main.c(58,9): warning C4024: 'push': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+C:\Users\JJW_N-771\Desktop\Cstd\stack\main.c(62,28): warning C4047: '함수': 'int **'의 간접 참조 수준이 'int *'과(와) 다릅니다.
+C:\Users\JJW_N-771\Desktop\Cstd\stack\main.c(62,23): warning C4024: 'pop': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+C:\Users\JJW_N-771\Desktop\Cstd\stack\main.c(66,29): warning C4047: '함수': 'int **'의 간접 참조 수준이 'int *'과(와) 다릅니다.
+C:\Users\JJW_N-771\Desktop\Cstd\stack\main.c(66,24): warning C4024: 'size': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+C:\Users\JJW_N-771\Desktop\Cstd\stack\main.c(70,30): warning C4047: '함수': 'int **'의 간접 참조 수준이 'int *'과(와) 다릅니다.
+C:\Users\JJW_N-771\Desktop\Cstd\stack\main.c(70,25): warning C4024: 'empty': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+C:\Users\JJW_N-771\Desktop\Cstd\stack\main.c(74,28): warning C4047: '함수': 'int **'의 간접 참조 수준이 'int *'과(와) 다릅니다.
+C:\Users\JJW_N-771\Desktop\Cstd\stack\main.c(74,23): warning C4024: 'top': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+C:\Users\JJW_N-771\Desktop\Cstd\stack\main.c(45,1): warning C4047: '초기화 중': 'int *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+  stack.vcxproj -> C:\Users\JJW_N-771\Desktop\Cstd\stack\Debug\stack.exe

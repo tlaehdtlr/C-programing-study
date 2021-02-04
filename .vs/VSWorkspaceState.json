@@ -1,9 +1,10 @@
 {
   "ExpandedNodes": [
     "",
+    "\\add_odd",
     "\\arrpointer",
     "\\sort_num2"
   ],
-  "SelectedNode": "\\sort_num2\\sort_num2.sln",
+  "SelectedNode": "\\add_odd\\main.c",
   "PreviewInSolutionExplorer": false
 }
