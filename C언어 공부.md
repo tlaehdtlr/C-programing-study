@@ -305,137 +305,6 @@ int main()
 
 
 
-### 메모리
-
-- 정적 메모리 할당
-
-  - ```
-    char name[3][20] = {"김땡땡", "박땡땡", "이땡땡"}
-    ```
-
-    이러면 20 공간에 3글자만 들어가서 메모리 낭비 중
-
-- 동적 메모리 할당
-
-  - 포인터 변수 선언
-    임의 공간 원하는 만큼 할당, 그 주소 포인터에 저장
-    포인터를 이용하여 할당 받은 메모리 공간 사용
-    다 쓰고 할당받은 메모리 해제하여 운영체제에 돌려줌
-
-  - ```c
-    #include <stdlib.h>
-    char *str = NULL;
-    str = (char*)malloc(20);
-    strcpy(str, "안녕하세요");
-    printf("%s \n", str);
-    free(str);
-    ```
-
-#### malloc
-
-- https://blockdmask.tistory.com/286 설명 보셈
-
-- malloc 사용
-
-  ```c
-  #include <stdio.h>
-  #include <stdlib.h>
-  
-  int main()
-  {
-      int *arr;
-      int n;
-  
-      // 배열 크기 받기
-      scanf("%d", &n);
-      // int형 배열 n개 크기 만듦
-      arr = (int*)malloc(sizeof(int)*n);
-      // n개 수 배열에 저장
-      for (int i=0; i<n; i++) scanf("%d", &arr[i]);
-      
-      for (int i=0; i<n; i++) printf("%d \n", arr[i]);
-      
-      // 동적할당 해제 (프린트 하고 나서 다~ 쓰고 해제해줘라)
-      free(arr);        
-  }
-  ```
-
-- malloc 사용 2차원 배열 생성 코드
-
-  ```c
-  #include <stdio.h>
-  #include <stdlib.h>    // malloc, free 함수가 선언된 헤더 파일
-  void input_value(int **arr, int row, int col);
-  void output_value(int **arr, int row, int col);
-  
-  int main(void)
-  {
-  	int row, col;
-  	scanf("%d %d", &row, &col);
-  
-  	int **arr = malloc(sizeof(int *) * row);   
-  	/* 이중 포인터에 (int 포인터 크기 * row)만큼
-  	동적 메모리 할당. 배열의 세로 */
-  
-  	for (int i = 0; i < row; i++)            // 세로 크기만큼 반복
-  	{
-  		arr[i] = malloc(sizeof(int) * col);    
-  		// (int의 크기 * col)만큼 동적 메모리 할당. 배열의 가로
-  	}
-  
-  	input_value(arr, row, col);
-  	output_value(arr, row, col);
-  
-  	for (int i = 0; i < row; i++)    // 세로 크기만큼 반복
-  	{
-  		free(arr[i]);            // 2차원 배열의 가로 공간 메모리 해제
-  	}
-  
-  	free(arr);    // 2차원 배열의 세로 공간 메모리 해제
-  
-  	return 0;
-  }
-  
-  void input_value(int **arr, int row, int col)
-  {
-  	for (int i = 0; i < row; i++)
-  	{
-  		for (int j = 0; j < col; j++)
-  		{
-  			scanf("%d", &arr[i][j]);
-  		}
-  	}
-  }
-  
-  void output_value(int **arr, int row, int col)
-  {
-  	for (int i = 0; i < row; i++)
-  	{
-  		for (int j = 0; j < col; j++)
-  		{
-  			printf("%d ", arr[i][j]);
-  		}
-  		printf("\n");
-  	}
-  }
-  ```
-
-  
-
-
-
-
-
-
-- 메모리 관련 함수들
-
-  - memset(포인터, 값, 바이트 수);
-    - 포인터가 가리키는 주소부터 바이트수 만큼을 값으로 채움
-    - 메모리 할당 받고 초기화 해주는 습관!!
-  - memcpy(받은 포인터, 복사할 값 들어있는 주소, 바이트수);
-    - 2차 배열 복사할 때 strcpy()는 여러번 사용해야는데 이거 하번이면 됨
-  - 
-
 
 
 
@@ -644,6 +513,137 @@ void main()
 ```
 
 
+
+### 메모리
+
+- 정적 메모리 할당
+
+  - ```
+    char name[3][20] = {"김땡땡", "박땡땡", "이땡땡"}
+    ```
+
+    이러면 20 공간에 3글자만 들어가서 메모리 낭비 중
+
+- 동적 메모리 할당
+
+  - 포인터 변수 선언
+    임의 공간 원하는 만큼 할당, 그 주소 포인터에 저장
+    포인터를 이용하여 할당 받은 메모리 공간 사용
+    다 쓰고 할당받은 메모리 해제하여 운영체제에 돌려줌
+
+  - ```c
+    #include <stdlib.h>
+    char *str = NULL;
+    str = (char*)malloc(20);
+    strcpy(str, "안녕하세요");
+    printf("%s \n", str);
+    free(str);
+    ```
+
+#### malloc
+
+- https://blockdmask.tistory.com/286 설명 보셈
+
+- malloc 사용
+
+  ```c
+  #include <stdio.h>
+  #include <stdlib.h>
+  
+  int main()
+  {
+      int *arr;
+      int n;
+  
+      // 배열 크기 받기
+      scanf("%d", &n);
+      // int형 배열 n개 크기 만듦
+      arr = (int*)malloc(sizeof(int)*n);
+      // n개 수 배열에 저장
+      for (int i=0; i<n; i++) scanf("%d", &arr[i]);
+      
+      for (int i=0; i<n; i++) printf("%d \n", arr[i]);
+      
+      // 동적할당 해제 (프린트 하고 나서 다~ 쓰고 해제해줘라)
+      free(arr);        
+  }
+  ```
+
+- malloc 사용 2차원 배열 생성 코드
+
+  ```c
+  #include <stdio.h>
+  #include <stdlib.h>    // malloc, free 함수가 선언된 헤더 파일
+  void input_value(int **arr, int row, int col);
+  void output_value(int **arr, int row, int col);
+  
+  int main(void)
+  {
+  	int row, col;
+  	scanf("%d %d", &row, &col);
+  
+  	int **arr = malloc(sizeof(int *) * row);   
+  	/* 이중 포인터에 (int 포인터 크기 * row)만큼
+  	동적 메모리 할당. 배열의 세로 */
+  
+  	for (int i = 0; i < row; i++)            // 세로 크기만큼 반복
+  	{
+  		arr[i] = malloc(sizeof(int) * col);    
+  		// (int의 크기 * col)만큼 동적 메모리 할당. 배열의 가로
+  	}
+  
+  	input_value(arr, row, col);
+  	output_value(arr, row, col);
+  
+  	for (int i = 0; i < row; i++)    // 세로 크기만큼 반복
+  	{
+  		free(arr[i]);            // 2차원 배열의 가로 공간 메모리 해제
+  	}
+  
+  	free(arr);    // 2차원 배열의 세로 공간 메모리 해제
+  
+  	return 0;
+  }
+  
+  void input_value(int **arr, int row, int col)
+  {
+  	for (int i = 0; i < row; i++)
+  	{
+  		for (int j = 0; j < col; j++)
+  		{
+  			scanf("%d", &arr[i][j]);
+  		}
+  	}
+  }
+  
+  void output_value(int **arr, int row, int col)
+  {
+  	for (int i = 0; i < row; i++)
+  	{
+  		for (int j = 0; j < col; j++)
+  		{
+  			printf("%d ", arr[i][j]);
+  		}
+  		printf("\n");
+  	}
+  }
+  ```
+
+  
+
+
+
+
+
+
+- 메모리 관련 함수들
+
+  - memset(포인터, 값, 바이트 수);
+    - 포인터가 가리키는 주소부터 바이트수 만큼을 값으로 채움
+    - 메모리 할당 받고 초기화 해주는 습관!!
+  - memcpy(받은 포인터, 복사할 값 들어있는 주소, 바이트수);
+    - 2차 배열 복사할 때 strcpy()는 여러번 사용해야는데 이거 하번이면 됨
+  - 
 
 
 
