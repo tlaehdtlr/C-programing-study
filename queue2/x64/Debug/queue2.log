@@ -1,0 +1,4 @@
+﻿  main.c
+C:\Users\JJW_N-771\Desktop\Cstd\queue2\main.c(19,7): warning C4101: 'command' :참조되지 않은 지역 변수입니다.
+C:\Users\JJW_N-771\Desktop\Cstd\queue2\main.c(20,6): warning C4101: 'input_num' :참조되지 않은 지역 변수입니다.
+  queue2.vcxproj -> C:\Users\JJW_N-771\Desktop\Cstd\queue2\x64\Debug\queue2.exe

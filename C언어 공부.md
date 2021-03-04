@@ -463,6 +463,8 @@ free(s1);    // 동적 메모리 해제
 
 ### 구조체
 
+#### struct
+
 ```c
 struct score
 {
@@ -477,6 +479,9 @@ void main()
     struct score a;
     // 초기화 가능
     struct score a = {100, 75, 85};
+    // 이렇게도 초기화 가능
+    struct score a = {.scoreKOR=100, 75, 85};
+    
 	// 구조체 내의 변수에 접근법
     a.scoreMAT = 100;
     
@@ -498,6 +503,8 @@ void main()
 }
 ```
 
+#### typedef
+
 - 선언 쉽게
 
 ```c
@@ -511,6 +518,131 @@ void main()
     SCORE a;
 }
 ```
+
+#### enum
+
+- https://chanywa.com/178 설명 너무 잘 돼있고~
+
+- ```c
+  enum {
+      WHITE,
+      BLACK,
+      YELLOW,
+      BLUE,
+      GREEN,
+      MAX_COLOR,
+  };
+  
+  int color_array[MAX_COLOR];
+  color_array[YELLOW]++;
+  color_array[GREEN]++;
+  
+  for(int i=0; i<MAX_COLOR; i++)
+  {
+      printf( "%d ", color_array[i] );
+  }
+  
+  ```
+
+- ```c
+  void print_color_name( int color )
+  {
+      switch( color )
+      {
+          case BLACK:    printf("Color is Black\n");    break;
+          case YELLOW:    printf("Color is Yellow\n");    break;
+          default:    printf("What color is it?\n");    break;         
+      }
+  }
+  
+  int main(void)
+  {
+      print_color_name( BLACK );
+      print_color_name( 2 );
+      print_color_name( GREEN );
+      return 0;
+  }
+  
+  /*
+  실행결과>
+  Color is Black
+  Color is Yellow
+  What color is it?
+  */
+  
+  #define AvanteHD    2
+  
+  print_color_name( AvanteHD );
+  print_color_name( TRUE );
+  
+  /*
+  Color is Yellow
+  Color is Black
+  */
+  
+  ```
+
+- typedef enum 도 설명 굿
+
+  ```c
+  typedef enum {
+      WHITE,
+      BLACK,
+      YELLOW,
+      BLUE,
+      GREEN,
+      MAX_COLOR,
+  } COLOR_TYPE;
+  
+  void print_color_name(COLOR_TYPE color)
+  {
+      ....
+  }
+  
+  ```
+
+#### struct & enum 이용 예제 만들어봄
+
+- ```c
+  #include <stdio.h>
+  typedef struct A
+  {
+      int a;
+      int va[4];
+  } A_;
+  
+  typedef enum
+  {
+      fst,
+      sec,
+  } myNum;
+  
+  int main() {
+      
+      A_ vA[2] = 
+      {
+          {.a=1,},
+          {.a=3,},
+      };
+      vA[0].va[1] = 77;
+      for (int j=0; j<2; j++)
+      {
+          printf("index %d : ", j );
+          for (int i=0; i<sizeof(vA[j].va)/sizeof(int); i++)
+          {
+              printf("%d ",vA[j].va[i]);
+          }
+          printf("\n");
+      }
+      
+      printf("vA[0].va[sec] : %d \n", vA[0].va[sec]);
+      return 0;
+  }
+  ```
+
+- 
+
+
 
 
 
