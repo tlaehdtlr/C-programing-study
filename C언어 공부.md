@@ -809,7 +809,52 @@ void main()
 - https://blockdmask.tistory.com/286
 - 디버그 모드에서만 컴파일되는 함수, 에러 검출용 코드
 
+### 변수
 
+#### static
+
+- https://yeolco.tistory.com/132
+
+- ```c
+  #include <stdio.h>
+   
+  int test(void)
+  {
+      static int count = 0;
+      count++;
+   
+      return count;
+  }
+   
+  int main(void)
+  {
+      printf("%d\n", test());
+      printf("%d\n", test());
+   
+      return 0;
+  }
+  
+  
+  실행결과 1 2
+  ```
+
+- 
+
+#### volatile
+
+- https://dojang.io/mod/page/view.php?id=749
+
+- ```c
+  volatile int i = 0;    // volatile로 선언하여 항상 메모리에 접근하도록 만듦
+  
+  // 항상 i의 메모리에 접근해야 하므로 컴파일러는 반복문을 없애지 않음
+  while (i < 10)
+      i++;
+  
+  printf("%d\n", i);    // 10
+  ```
+
+- 
 
 ### 매크로
 
